@@ -53,36 +53,75 @@ document.querySelectorAll("[data-menu-tab]").forEach((button) => {
   });
 });
 
-const pdfModal = document.querySelector("[data-pdf-modal]");
-const pdfFrame = document.querySelector("[data-pdf-frame]");
-const pdfModalTitle = document.querySelector("[data-pdf-modal-title]");
+const menuPages = {
+  fb: [
+    "assets/menu-fb-page-01.jpg",
+    "assets/menu-fb-page-02.jpg"
+  ],
+  cakes: [
+    "assets/menu-cakes-page-01.jpg",
+    "assets/menu-cakes-page-02.jpg",
+    "assets/menu-cakes-page-03.jpg",
+    "assets/menu-cakes-page-04.jpg",
+    "assets/menu-cakes-page-05.jpg",
+    "assets/menu-cakes-page-06.jpg",
+    "assets/menu-cakes-page-07.jpg",
+    "assets/menu-cakes-page-08.jpg"
+  ]
+};
 
-function openPdfModal(url, title) {
-  pdfModal.hidden = false;
-  pdfFrame.src = url;
-  pdfModalTitle.textContent = title;
+const menuModal = document.querySelector("[data-menu-modal]");
+const menuGallery = document.querySelector("[data-menu-gallery]");
+const menuModalTitle = document.querySelector("[data-menu-modal-title]");
+
+function renderMenuGallery(key, title) {
+  const pages = menuPages[key] ?? [];
+  const stack = document.createElement("div");
+  stack.className = "menu-gallery-stack";
+
+  pages.forEach((src, index) => {
+    const figure = document.createElement("figure");
+    const image = document.createElement("img");
+    const caption = document.createElement("figcaption");
+
+    image.src = src;
+    image.alt = `${title} page ${index + 1}`;
+    image.loading = index === 0 ? "eager" : "lazy";
+    caption.textContent = `Page ${index + 1}`;
+
+    figure.append(image, caption);
+    stack.append(figure);
+  });
+
+  menuGallery.replaceChildren(stack);
+}
+
+function openMenuModal(key, title) {
+  renderMenuGallery(key, title);
+  menuModal.hidden = false;
+  menuModalTitle.textContent = title;
   document.body.classList.add("modal-open");
 }
 
-function closePdfModal() {
-  pdfModal.hidden = true;
-  pdfFrame.src = "";
+function closeMenuModal() {
+  menuModal.hidden = true;
+  menuGallery.replaceChildren();
   document.body.classList.remove("modal-open");
 }
 
-document.querySelectorAll("[data-pdf-open]").forEach((button) => {
+document.querySelectorAll("[data-menu-open]").forEach((button) => {
   button.addEventListener("click", () => {
-    openPdfModal(button.dataset.pdfOpen, button.dataset.pdfTitle || "Menu PDF");
+    openMenuModal(button.dataset.menuOpen, button.dataset.menuTitle || "Menu");
   });
 });
 
-document.querySelectorAll("[data-pdf-close]").forEach((button) => {
-  button.addEventListener("click", closePdfModal);
+document.querySelectorAll("[data-menu-close]").forEach((button) => {
+  button.addEventListener("click", closeMenuModal);
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !pdfModal.hidden) {
-    closePdfModal();
+  if (event.key === "Escape" && !menuModal.hidden) {
+    closeMenuModal();
   }
 });
 

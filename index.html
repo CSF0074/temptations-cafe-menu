@@ -158,7 +158,7 @@
               <h3>F&B Menu</h3>
               <p>Baguettes, pastries, thick shakes, beverages, and desserts.</p>
             </div>
-            <button class="button primary" type="button" data-pdf-open="assets/F%26B%20Menu.pdf" data-pdf-title="F&B Menu">Explore</button>
+            <button class="button primary" type="button" data-menu-open="fb" data-menu-title="F&B Menu">Explore</button>
           </article>
           <article class="pdf-tile" id="cakes">
             <div>
@@ -166,7 +166,7 @@
               <h3>Cake Menu</h3>
               <p>Chocolate, fruit, gourmet, wedding, and designer cake options.</p>
             </div>
-            <button class="button primary" type="button" data-pdf-open="assets/Celebration%20Cakes%20Menu.pdf" data-pdf-title="Celebration Cakes Menu">Explore</button>
+            <button class="button primary" type="button" data-menu-open="cakes" data-menu-title="Celebration Cakes Menu">Explore</button>
           </article>
         </div>
       </section>
@@ -248,14 +248,14 @@
       </svg>
     </a>
 
-    <div class="pdf-modal" data-pdf-modal hidden>
-      <div class="pdf-modal-backdrop" data-pdf-close></div>
+    <div class="pdf-modal" data-menu-modal hidden>
+      <div class="pdf-modal-backdrop" data-menu-close></div>
       <section class="pdf-modal-panel" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
         <div class="pdf-modal-header">
-          <h2 id="pdf-modal-title" data-pdf-modal-title>Menu PDF</h2>
-          <button class="pdf-close" type="button" data-pdf-close aria-label="Close PDF popup">Close</button>
+          <h2 id="pdf-modal-title" data-menu-modal-title>Menu</h2>
+          <button class="pdf-close" type="button" data-menu-close aria-label="Close menu popup">Close</button>
         </div>
-        <iframe data-pdf-frame title="Menu PDF preview"></iframe>
+        <div class="menu-gallery" data-menu-gallery></div>
       </section>
     </div>
 
